@@ -4,6 +4,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const fetchUser = require("../middlleware/fetchUser");
 
 const privateKey = "Hasnain3318787833"; // Example private key, replace with your own
 
@@ -26,10 +27,11 @@ router.post(
 
     try {
       // Check if user already exists
-      let user = await User.find({ email });
+      let user = await User.findOne({ email });
       if (user) {
         return res.status(400).json({ error: "User already exists" });
       }
+
       // Hash the password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
@@ -58,35 +60,57 @@ router.post(
 );
 
 // Route to authenticate a user
-router.post("/login",[
-    body("email").isEmail(),
-    body("password").isLength({ min: 5 }),
-], async (req, res) => {
-  const { email, password } = req.body;
+router.post(
+  "/login",
+  [body("email").isEmail(), body("password").isLength({ min: 5 })],
+  async (req, res) => {
+    // Validate request body
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
+    const { email, password } = req.body;
+
+    try {
+      // Check if user exists
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ error: "Invalid credentials" });
+      }
+
+      // Compare the password
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ error: "Invalid credentials" });
+      }
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(data, privateKey);
+      res.status(200).json({ message: "Login successful", token });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+);
+
+// Route to get user details
+router.get("/getuser", fetchUser, async (req, res) => {
   try {
-    // Check if user exists
-    let user = await User.findOne({ email });
+    const user = await User.findById(req.user.id);
     if (!user) {
-      return res.status(400).json({ error: "Invalid credentials" });
+      return res.status(404).json({ error: "User not found" });
     }
-
-    // Compare the password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ error: "Invalid credentials" });
-    }
-    const data = {
-      user: {
-        id: user.id,
-      },
-    };
-    const token = jwt.sign(data, privateKey);
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 module.exports = router;
