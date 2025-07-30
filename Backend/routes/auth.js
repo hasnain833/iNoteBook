@@ -49,9 +49,16 @@ router.post(
         },
       };
       const token = jwt.sign(data, privateKey);
-      // Set the token in the response header
-      res.header("auth-token", token);
-      res.status(201).json({ message: "User created successfully" });
+      // Return user data and token
+      res.status(201).json({ 
+        message: "User created successfully",
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        }
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
@@ -90,7 +97,15 @@ router.post(
         },
       };
       const token = jwt.sign(data, privateKey);
-      res.status(200).json({ message: "Login successful", token });
+      res.status(200).json({ 
+        message: "Login successful", 
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        }
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
