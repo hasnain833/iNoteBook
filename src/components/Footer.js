@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Github, Twitter, Mail } from 'lucide-react';
+import { BookOpen, Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -15,13 +15,13 @@ const Footer = () => {
               Your personal notebook in the cloud. Create, organize, and access your notes from anywhere, anytime.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="https://github.com/hasnain833" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="https://www.linkedin.com/in/hasnain-aftab-043632302/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="mailto:hasnainaftab87@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

@@ -29,7 +29,7 @@ const About = () => {
               should be wherever you are.
             </p>
             <p className="text-gray-600 mb-4">
-              Founded in 2024, we set out to create the most intuitive, secure, and accessible 
+              Founded in 2025, we set out to create the most intuitive, secure, and accessible 
               note-taking platform on the web. Our team combines years of experience in software 
               development, user experience design, and productivity tools to bring you a product 
               that truly understands how you work and think.
@@ -89,23 +89,23 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="bg-white bg-opacity-20 rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                <span className="text-2xl font-bold">JD</span>
+                <span className="text-2xl font-bold">HA</span>
               </div>
-              <h3 className="text-lg font-semibold mb-1">John Doe</h3>
+              <h3 className="text-lg font-semibold mb-1">Hasnain Aftab</h3>
               <p className="text-blue-200">Founder & CEO</p>
             </div>
             <div className="text-center">
               <div className="bg-white bg-opacity-20 rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                <span className="text-2xl font-bold">JS</span>
+                <span className="text-2xl font-bold">HA</span>
               </div>
-              <h3 className="text-lg font-semibold mb-1">Jane Smith</h3>
+              <h3 className="text-lg font-semibold mb-1">Hasnain Aftab</h3>
               <p className="text-blue-200">Lead Developer</p>
             </div>
             <div className="text-center">
               <div className="bg-white bg-opacity-20 rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                <span className="text-2xl font-bold">MJ</span>
+                <span className="text-2xl font-bold">HA</span>
               </div>
-              <h3 className="text-lg font-semibold mb-1">Mike Johnson</h3>
+              <h3 className="text-lg font-semibold mb-1">Hasnain Aftab</h3>
               <p className="text-blue-200">UX Designer</p>
             </div>
           </div>
